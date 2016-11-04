@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'DatatistTracker_Example' do
+  pod 'DatatistTracker', :path => '../'
+
+  target 'DatatistTracker_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+  pod 'Expecta'
+  end
+end
