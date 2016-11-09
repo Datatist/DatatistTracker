@@ -84,6 +84,13 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  */
 + (instancetype)sharedInstance;
 
+
+/**
+ sync JSPatchC patch
+ */
++ (void)sync;
+
+
 /**
  Datatist site id.
  
@@ -463,6 +470,12 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  Delete all pending events.
  */
 - (void)deleteQueuedEvents;
+
+- (void)setPushClientId:(NSString *)cid andType:(NSString *)type;
+
+- (void)sendPushReceiveEventWithCampaignId:(NSString *)campaignId;
+
+- (void)sendPushOpenEventWithCampaignId:(NSString *)campaignId;
 
 
 /**
