@@ -15,6 +15,14 @@
 
 @class DatatistTransaction;
 
+typedef NS_ENUM(NSInteger, DatatistPushType) {
+    DatatistPushTypeJPush = 0,      // 极光
+    DatatistPushTypeGetui = 1,      // 个推
+    DatatistPushTypeUmeng = 2,      // 友盟
+    DatatistPushTypeOthers = 256,   // 其他
+};
+
+
 
 /**
  
@@ -83,6 +91,13 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @see sharedInstanceWithSiteID:baseURL:
  */
 + (instancetype)sharedInstance;
+
+
+/**
+ sync JSPatchC patch
+ */
++ (void)sync;
+
 
 /**
  Datatist site id.
@@ -463,6 +478,34 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  Delete all pending events.
  */
 - (void)deleteQueuedEvents;
+
+
+
+/**
+ Specifies push client id and push type
+
+ @param cid push client id
+ @param type push type
+ */
+- (void)setPushClientId:(NSString *)cid andType:(DatatistPushType)type;
+
+
+
+/**
+ Track when receive push message
+
+ @param campaignId
+ */
+- (void)sendPushReceiveEventWithCampaignId:(NSString *)campaignId;
+
+
+
+/**
+ Track when user read push message
+
+ @param campaignId
+ */
+- (void)sendPushOpenEventWithCampaignId:(NSString *)campaignId;
 
 
 /**
