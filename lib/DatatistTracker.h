@@ -494,7 +494,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 /**
  Track when receive push message
 
- @param campaignId
+ @param campaignId target group
  */
 - (void)sendPushReceiveEventWithCampaignId:(NSString *)campaignId;
 
@@ -503,7 +503,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 /**
  Track when user read push message
 
- @param campaignId
+ @param campaignId target group
  */
 - (void)sendPushOpenEventWithCampaignId:(NSString *)campaignId;
 
