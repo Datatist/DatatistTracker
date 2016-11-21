@@ -494,18 +494,18 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 /**
  Track when receive push message
 
- @param campaignId
+ @param dic push user info
  */
-- (void)sendPushReceiveEventWithCampaignId:(NSString *)campaignId;
+- (void)sendPushReceiveEventWithUserInfo:(NSDictionary *)dic;
 
 
 
 /**
  Track when user read push message
 
- @param campaignId
+ @param dic push user info
  */
-- (void)sendPushOpenEventWithCampaignId:(NSString *)campaignId;
+- (void)sendPushOpenEventWithUserInfo:(NSDictionary *)dic;
 
 
 /**
