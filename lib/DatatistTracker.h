@@ -22,7 +22,10 @@ typedef NS_ENUM(NSInteger, DatatistPushType) {
     DatatistPushTypeOthers = 256,   // 其他
 };
 
-
+typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
+    DatatistAPIRequestResultSuccess = 0,  // 成功
+    DatatistAPIRequestResultFailed  = 1,  // 失败
+};
 
 /**
  
@@ -228,7 +231,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendView:(NSString*)screen;
 - (BOOL)sendView:(NSString*)screen withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -243,7 +245,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendViews:(NSString*)screen, ...;
 - (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
 
 
@@ -258,7 +259,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendViewsFromArray:(NSArray*)screens;
 - (BOOL)sendViewsFromArray:(NSArray*)screens withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -269,11 +269,9 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param category The category of the event
  @param action The name of the action, e.g Play, Pause, Download
  @param name Event name, e.g. song name, file name. Optional.
- @param value A numeric value, float or integer. Optional.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSNumber*)value;
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSNumber*)value withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a caught exception or error.
@@ -285,7 +283,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal;
 - (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -299,7 +296,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendSocialInteraction:(NSString*)action target:(NSString*)target forNetwork:(NSString*)network;
 - (BOOL)sendSocialInteraction:(NSString*)action target:(NSString*)target forNetwork:(NSString*)network withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -309,7 +305,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param revenue The monetary value of the conversion.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendGoalWithID:(NSUInteger)goalID revenue:(NSUInteger)revenue;
 - (BOOL)sendGoalWithID:(NSUInteger)goalID revenue:(NSUInteger)revenue withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -322,7 +317,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param numberOfHits The number of results found (optional).
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendSearchWithKeyword:(NSString*)keyword category:(NSString*)category numberOfHits:(NSNumber*)numberOfHits;
 - (BOOL)sendSearchWithKeyword:(NSString*)keyword category:(NSString*)category numberOfHits:(NSNumber*)numberOfHits withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -338,7 +332,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @see DatatistTransaction
  @see DatatistTransactionItem
  */
-- (BOOL)sendTransaction:(DatatistTransaction*)transaction;
 - (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -347,7 +340,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param url The url which leads to an external website or app.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendOutlink:(NSString*)url;
 - (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -356,7 +348,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param url The url of the downloaded content.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendDownload:(NSString*)url;
 - (BOOL)sendDownload:(NSString*)url withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -380,7 +371,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param campaignURLString A custom app URL containing campaign parameters.
  @return YES if URL was detected to contain Datatist campaign parameter.
  */
-- (BOOL)sendCampaign:(NSString*)campaignURLString;
 - (BOOL)sendCampaign:(NSString*)campaignURLString withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -394,7 +384,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see sendContentInteractionWithName:piece:target:
  */
-- (BOOL)sendContentImpressionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target;
 - (BOOL)sendContentImpressionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -408,7 +397,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see sendContentImpressionWithName:piece:target:
  */
-- (BOOL)sendContentInteractionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target;
 - (BOOL)sendContentInteractionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target withCustomVariable:(NSDictionary *)vars;
 
 
@@ -506,6 +494,19 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param dic push user info
  */
 - (void)sendPushOpenEventWithUserInfo:(NSDictionary *)dic;
+
+
+
+/**
+ Track when send API request
+
+ @param path request path
+ @param start when send request, yyyy-MM-dd HH:mm:ss.SSS
+ @param result request resutl
+ @param ms request duratiion
+ @param vars custom variable
+ */
+- (void)sendAPIEventWithPath:(NSString *)path andStarttime:(NSString *)start andResult:(DatatistAPIRequestResult)result andDuration:(NSInteger)ms withCustomVariable:(NSDictionary *)vars;
 
 
 /**
