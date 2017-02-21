@@ -33,12 +33,12 @@ typedef void (^TransactionBuilderBlock)(DatatistTransactionBuilder *builder);
 /**
  The sub total of the transaction (excluding shipping cost). Optional.
  */
-@property (nonatomic, readonly) NSNumber *subTotal;
+@property (nonatomic, readonly) NSNumber *subTotal DEPRECATED_ATTRIBUTE;
 
 /**
  The total tax. Optional.
  */
-@property (nonatomic, readonly) NSNumber *tax;
+@property (nonatomic, readonly) NSNumber *tax DEPRECATED_ATTRIBUTE;
 
 /**
  The total shipping cost. Optional.

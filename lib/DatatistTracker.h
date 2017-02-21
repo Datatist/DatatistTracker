@@ -231,7 +231,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendView:(NSString*)screen;
+- (BOOL)sendView:(NSString*)screen DEPRECATED_ATTRIBUTE;
 - (BOOL)sendView:(NSString*)screen withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -246,7 +246,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendViews:(NSString*)screen, ...;
+- (BOOL)sendViews:(NSString*)screen, ... DEPRECATED_ATTRIBUTE;
 - (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
 
 
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendViewsFromArray:(NSArray*)screens;
+- (BOOL)sendViewsFromArray:(NSArray*)screens DEPRECATED_ATTRIBUTE;
 - (BOOL)sendViewsFromArray:(NSArray*)screens withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -274,8 +274,9 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param name Event name, e.g. song name, file name. Optional.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value;
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value DEPRECATED_ATTRIBUTE;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a caught exception or error.
@@ -287,8 +288,8 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal;
-- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal DEPRECATED_ATTRIBUTE;
+- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars  DEPRECATED_ATTRIBUTE;
 
 /**
  Track a users interaction with social networks.
@@ -301,7 +302,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see isPrefixingEnabled
  */
-- (BOOL)sendSocialInteraction:(NSString*)action target:(NSString*)target forNetwork:(NSString*)network;
+- (BOOL)sendSocialInteraction:(NSString*)action target:(NSString*)target forNetwork:(NSString*)network DEPRECATED_ATTRIBUTE;
 - (BOOL)sendSocialInteraction:(NSString*)action target:(NSString*)target forNetwork:(NSString*)network withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -311,7 +312,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param revenue The monetary value of the conversion.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendGoalWithID:(NSUInteger)goalID revenue:(NSUInteger)revenue;
+- (BOOL)sendGoalWithID:(NSUInteger)goalID revenue:(NSUInteger)revenue DEPRECATED_ATTRIBUTE;
 - (BOOL)sendGoalWithID:(NSUInteger)goalID revenue:(NSUInteger)revenue withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -324,7 +325,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param numberOfHits The number of results found (optional).
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendSearchWithKeyword:(NSString*)keyword category:(NSString*)category numberOfHits:(NSNumber*)numberOfHits;
+- (BOOL)sendSearchWithKeyword:(NSString*)keyword category:(NSString*)category numberOfHits:(NSNumber*)numberOfHits DEPRECATED_ATTRIBUTE;
 - (BOOL)sendSearchWithKeyword:(NSString*)keyword category:(NSString*)category numberOfHits:(NSNumber*)numberOfHits withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -340,7 +341,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @see DatatistTransaction
  @see DatatistTransactionItem
  */
-- (BOOL)sendTransaction:(DatatistTransaction*)transaction;
+- (BOOL)sendTransaction:(DatatistTransaction*)transaction DEPRECATED_ATTRIBUTE;
 - (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -349,8 +350,8 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param url The url which leads to an external website or app.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendOutlink:(NSString*)url;
-- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendOutlink:(NSString*)url DEPRECATED_ATTRIBUTE;
+- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
 
 /**
  Track a download initiated by the app.
@@ -358,7 +359,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param url The url of the downloaded content.
  @return YES if the event was queued for dispatching.
  */
-- (BOOL)sendDownload:(NSString*)url;
+- (BOOL)sendDownload:(NSString*)url DEPRECATED_ATTRIBUTE;
 - (BOOL)sendDownload:(NSString*)url withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -382,7 +383,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @param campaignURLString A custom app URL containing campaign parameters.
  @return YES if URL was detected to contain Datatist campaign parameter.
  */
-- (BOOL)sendCampaign:(NSString*)campaignURLString;
+- (BOOL)sendCampaign:(NSString*)campaignURLString DEPRECATED_ATTRIBUTE;
 - (BOOL)sendCampaign:(NSString*)campaignURLString withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -396,7 +397,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see sendContentInteractionWithName:piece:target:
  */
-- (BOOL)sendContentImpressionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target;
+- (BOOL)sendContentImpressionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target DEPRECATED_ATTRIBUTE;
 - (BOOL)sendContentImpressionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target withCustomVariable:(NSDictionary *)vars;
 
 /**
@@ -410,32 +411,16 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  @see sendContentImpressionWithName:piece:target:
  */
-- (BOOL)sendContentInteractionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target;
+- (BOOL)sendContentInteractionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target DEPRECATED_ATTRIBUTE;
 - (BOOL)sendContentInteractionWithName:(NSString*)name piece:(NSString*)piece target:(NSString*)target withCustomVariable:(NSDictionary *)vars;
 
 
 /**
- @name Custom variables
- */
+ add custom variable
 
-/**
- Assign a custom variable.
- 
- A custom variable is a name-value pair that you can assign to your visits or individual screen views. The Datatist server will visualise how many visits, conversions, etc. occurred for each custom variable.
- You can track by default up to 5 custom variables per visit and/or up to 5 custom variables per page view. It is possible to configure the Datatist server to accept additional number of custom variables.
- 
- Keep the name and value short to ensure that the URL length doesn't go over the URL limit for the web server or http client.
- 
- Please note that the iOS SDK by default will use index 1-3 to report information about your app and users device at each visit (leaving index 4-5 available to the app developer). You can turn this off if you prefer to use index 1-3 for your own reporting purpose.
- 
- @param index Custom variable index. You should only use unique index numbers unless you want to overwrite your data.
- @param name Custom variable name.
- @param value Custom variable value.
- @param scope Using visit scope will associate the custom variable with the current session. Create a new session before and after setting a visit custom variable to limit the actions associated with the custom variable. Screen scope will limit the custom variable to a single screen view.
- @see includeDefaultCustomVariable
+ @param proterties proterties description
  */
-- (BOOL)setCustomVariableForIndex:(NSUInteger)index name:(NSString*)name value:(NSString*)value scope:(CustomVariableScope)scope;
-
+- (void)addvisitproperty:(NSDictionary *)proterties;
 
 /**
  @name Dispatch pending events
@@ -497,8 +482,9 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  Track when receive push message
 
  @param dic push user info
+  @param vars custom variable
  */
-- (void)sendPushReceiveEventWithUserInfo:(NSDictionary *)dic;
+- (void)sendPushReceiveEventWithUserInfo:(NSDictionary *)dic withCustomVariable:(NSDictionary *)vars;
 
 
 
@@ -506,8 +492,9 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  Track when user read push message
 
  @param dic push user info
+  @param vars custom variable
  */
-- (void)sendPushOpenEventWithUserInfo:(NSDictionary *)dic;
+- (void)sendPushOpenEventWithUserInfo:(NSDictionary *)dic withCustomVariable:(NSDictionary *)vars;
 
 
 
