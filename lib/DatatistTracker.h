@@ -97,12 +97,6 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 
 
 /**
- sync JSPatchC patch
- */
-+ (void)sync;
-
-
-/**
  Datatist site id.
  
  The value can be found in the Datatist server -> Settings -> Websites.
