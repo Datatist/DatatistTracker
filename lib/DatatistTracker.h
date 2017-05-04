@@ -269,8 +269,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  */
 - (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value DEPRECATED_ATTRIBUTE;
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a caught exception or error.
@@ -283,7 +282,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @see isPrefixingEnabled
  */
 - (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal DEPRECATED_ATTRIBUTE;
-- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars  DEPRECATED_ATTRIBUTE;
+- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a users interaction with social networks.
@@ -345,7 +344,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  */
 - (BOOL)sendOutlink:(NSString*)url DEPRECATED_ATTRIBUTE;
-- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
+- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a download initiated by the app.
