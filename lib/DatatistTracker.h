@@ -151,6 +151,11 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 @property(nonatomic) BOOL debug;
 
 /**
+ show log
+ */
+@property(nonatomic) BOOL showLog;
+
+/**
  Opt out of tracking.
  
  No events will be sent to the Datatist server. This feature can be used to allow the user to opt out of tracking due to privacy. The value will be retained across app restart and upgrades.
