@@ -151,16 +151,16 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 @property(nonatomic) BOOL debug;
 
 /**
- show log
- */
-@property(nonatomic) BOOL showLog;
-
-/**
  Opt out of tracking.
  
  No events will be sent to the Datatist server. This feature can be used to allow the user to opt out of tracking due to privacy. The value will be retained across app restart and upgrades.
  */
 @property(nonatomic) BOOL optOut;
+
+/**
+ show log
+ */
+@property(nonatomic) BOOL showLog;
 
 /**
  The probability of an event actually being sampled and sent to the Datatist server. Value 1-100, default 100.
@@ -274,7 +274,8 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  */
 - (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value DEPRECATED_ATTRIBUTE;
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name withCustomVariable:(NSDictionary *)vars;
 
 /**
  Track a caught exception or error.
@@ -287,7 +288,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @see isPrefixingEnabled
  */
 - (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal DEPRECATED_ATTRIBUTE;
-- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendExceptionWithDescription:(NSString*)description isFatal:(BOOL)isFatal withCustomVariable:(NSDictionary *)vars  DEPRECATED_ATTRIBUTE;
 
 /**
  Track a users interaction with social networks.
@@ -349,7 +350,7 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
  @return YES if the event was queued for dispatching.
  */
 - (BOOL)sendOutlink:(NSString*)url DEPRECATED_ATTRIBUTE;
-- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendOutlink:(NSString*)url withCustomVariable:(NSDictionary *)vars DEPRECATED_ATTRIBUTE;
 
 /**
  Track a download initiated by the app.
@@ -414,11 +415,27 @@ typedef NS_ENUM(NSUInteger, CustomVariableScope) {
 
 
 /**
- add custom variable
-
- @param proterties proterties description
+ @name Custom variables
  */
-- (void)addvisitproperty:(NSDictionary *)proterties;
+
+/**
+ Assign a custom variable.
+ 
+ A custom variable is a name-value pair that you can assign to your visits or individual screen views. The Datatist server will visualise how many visits, conversions, etc. occurred for each custom variable.
+ You can track by default up to 5 custom variables per visit and/or up to 5 custom variables per page view. It is possible to configure the Datatist server to accept additional number of custom variables.
+ 
+ Keep the name and value short to ensure that the URL length doesn't go over the URL limit for the web server or http client.
+ 
+ Please note that the iOS SDK by default will use index 1-3 to report information about your app and users device at each visit (leaving index 4-5 available to the app developer). You can turn this off if you prefer to use index 1-3 for your own reporting purpose.
+ 
+ @param index Custom variable index. You should only use unique index numbers unless you want to overwrite your data.
+ @param name Custom variable name.
+ @param value Custom variable value.
+ @param scope Using visit scope will associate the custom variable with the current session. Create a new session before and after setting a visit custom variable to limit the actions associated with the custom variable. Screen scope will limit the custom variable to a single screen view.
+ @see includeDefaultCustomVariable
+ */
+- (BOOL)setCustomVariableForIndex:(NSUInteger)index name:(NSString*)name value:(NSString*)value scope:(CustomVariableScope)scope DEPRECATED_ATTRIBUTE;
+
 
 /**
  @name Dispatch pending events
