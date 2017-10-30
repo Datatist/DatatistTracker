@@ -6,7 +6,8 @@ password: infomokbel1!
 
 发布方法：
     1， 克隆代码 https://gitlab.datatist.cn/datatist/datatist-analyzer-ios-tracker.git 
-    2， 打开 DatatistTracker.xcodeproj，选中 DatatistTracker Scheme，编译
+    2， 打开 DatatistTracker.xcodeproj，修改 DatatistTracker.m 中修改版本号，
+        选中 DatatistTracker Scheme，编译
     3，选中 DatatistTracker_universal Scheme, 编译
     4，右键 libDatatistTracker.a, show in Finder
     5, 将 Release-universal 目录下的 libDatatistTracker-Release.a 复制到 lib 目录下，并重命名为 libDatatistTracker.a。
