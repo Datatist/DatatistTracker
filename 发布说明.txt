@@ -1,4 +1,4 @@
-DatatistTracker cocoapods 库。 
+DatatistTracker cocoapods 库。 测试提交.
 这个库里面是 .a 和 头文件，部署在 github 上，https://github.com/Datatist/DatatistTracker。
 username： Datatist
 email：info@datatist.com
