@@ -30,12 +30,23 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
     DatatistAPIRequestResultFailed  = 1,  // 失败
 };
 
+@interface CustomVariable : NSObject
+
+@property (nonatomic) NSUInteger index;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *value;
+
+- (id)initWithIndex:(NSUInteger)index name:(NSString*)name value:(NSString*)value;
+
+@end
+
 /**
  
  The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analytics to a Datatist server.
  
  Datatist server is a downloadable, Free/Libre (GPLv3 licensed) real time web analytics software, [http://datatist.org](http://datatist.org).
  This framework implements the Datatist tracking REST API [http://datatist.org/docs/tracking-api/reference.](http://datatist.org/docs/tracking-api/reference/)
+ 
  
  ###How does it work
  
@@ -48,9 +59,6 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  All methods are asynchronous and will return immediately.
  */
 @interface DatatistTracker : NSObject
-
-
-extern NSString * const DatatistSessionStartNotification;
 
 
 /**
@@ -70,6 +78,7 @@ extern NSString * const DatatistSessionStartNotification;
  */
 + (instancetype)initWithSiteID:(NSString*)siteID baseURL:(NSURL*)baseURL;
 
++ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL;
 
 /**
  Return the shared Datatist tracker.
@@ -283,8 +292,18 @@ extern NSString * const DatatistSessionStartNotification;
 /**
  *  track Event
  **/
-- (void)trackEvent:(NSString *)name body:(NSDictionary *)eventBody udVariable:(NSDictionary *)vars;
+- (void)trackEvent:(NSString *)name udVariable:(NSDictionary *)vars;
 
+
+/**
+ *  track JPush
+ **/
+- (void)trackJPush:(NSDictionary *)pushInfo pushIntent:(NSDictionary *)pushIntent udVariable:(NSDictionary *)vars;
+
+/**
+ *  track Init JPush
+ **/
+- (void)trackInitJPush:(NSDictionary *)pushManager udVariable:(NSDictionary *)vars;
 
 /**
  Manually start a dispatch of all pending events.

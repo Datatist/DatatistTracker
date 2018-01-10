@@ -19,4 +19,8 @@
 
 - (instancetype)initWithDatatistURL:(NSURL*)datatistURL;
 
++ (NSString *)dicToJSONString:(id)dic;
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
+
 @end

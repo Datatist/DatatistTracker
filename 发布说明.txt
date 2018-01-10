@@ -12,11 +12,15 @@ password: infomokbel1!
     4，右键 libDatatistTracker.a, show in Finder
     5, 将 Release-universal 目录下的 libDatatistTracker-Release.a 复制到 lib 目录下，并重命名为 libDatatistTracker.a。
        将 include 目录下 .h 文件 复制到 lib 目录下。
-    6, commit 并 push，用 SDK 的version，打 tag。例如： 如果 SDK 的版本号是 2.0.0，则 tag 就是 2.0.0
-    7，在 terminal 中执行 pod trunk register xxx@datatist.com 'xxx' --description='mackbook pro'
-       （xxx@datatist.com 为公司邮箱， xxx 为邮箱用户名），执行成功后，会收到一封邮件。打开邮件，点击里面的连接。
-    8，cd 到 DatatistTracker cocoapods 库根目录，执行
-       pod trunk push DatatistTracker.podspec --allow-warnings
+
+    6, commit 并 push，用 SDK 的version，打 tag。例如： 如果 SDK 的版本号是 2.0.0，则 tag 就是 2.0.0   并上传tig. git push --tags
+    7, pod spec lint DatatistTracker.podspec验证一下.
+    8，在 terminal 中执行 pod trunk register xxx@datatist.com 'xxx' --description='mackbook pro'
+       （xxx@datatist.com 为公司邮箱， xxx 为邮箱用户名），执行成功后，会收到一封邮件。打开邮件，点击里面的连接。 pod trunk register jim.zhang@datatist.com 'xxx' --description='mackbook pro'
+    9，cd 到 DatatistTracker cocoapods 库根目录，执行
+       pod trunk push DatatistTracker.podspec --allow-warnings --verbose
+
+    10, pod search 'DatatistTracker' 查看有没有最新的版本(会有一会的延时)
        
 
      
