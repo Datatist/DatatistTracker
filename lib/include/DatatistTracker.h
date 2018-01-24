@@ -183,7 +183,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param title title of current view.
  @param vars user defined variables.
  */
-- (void)trackPageView:(NSArray *)views title:(NSString *)title udVariable:(NSDictionary *)vars;
+- (void)trackPageView:(NSString *)views title:(NSString *)title udVariable:(NSDictionary *)vars;
 
 
 /**
