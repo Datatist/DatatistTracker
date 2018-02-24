@@ -306,6 +306,11 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 - (void)trackInitJPush:(NSDictionary *)pushManager udVariable:(NSDictionary *)vars;
 
 /**
+ *  track Open Channel
+ **/
+- (void)trackOpenChannel:(NSString *)openChannelName udVariable:(NSDictionary *)vars;
+
+/**
  Manually start a dispatch of all pending events.
  
  @return YES if the dispatch process was started.

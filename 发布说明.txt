@@ -12,6 +12,7 @@ password: infomokbel1!
     4，右键 libDatatistTracker.a, show in Finder
     5, 将 Release-universal 目录下的 libDatatistTracker-Release.a 复制到 lib 目录下，并重命名为 libDatatistTracker.a。
        将 include 目录下 .h 文件 复制到 lib 目录下。
+修改DatatistTracker.podspec中的s.version为正确的版本号 2.0.0
 
     6, commit 并 push，用 SDK 的version，打 tag。例如： 如果 SDK 的版本号是 2.0.0，则 tag 就是 2.0.0   并上传tig. git push --tags
     7, pod spec lint DatatistTracker.podspec --allow-warnings --verbose验证一下.
