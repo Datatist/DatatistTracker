@@ -51,5 +51,7 @@ The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analyt
   s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics', 'CoreData'
   s.ios.library = 'c++', 'stdc++', 'z'
   s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
+s.dependency 'WebViewJavascriptBridge'
+s.dependency 'Aspects'
 
 end
