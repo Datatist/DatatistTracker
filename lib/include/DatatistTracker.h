@@ -12,6 +12,9 @@
 #import "DatatistCouponInfo.h"
 #import "DatatistProductInfo.h"
 #import "DatatistDispatcher.h"
+#import "DatatistTransaction.h"
+#import "WebViewJavascriptBridge.h"
+//@import WebViewJavascriptBridge;
 
 @class DatatistOrderInfo;
 @class DatatistCouponInfo;
@@ -288,6 +291,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackLogout:(NSString *)uid udVariable:(NSDictionary *)vars;
 
+- (void)trackLogout:(NSDictionary *)vars;
 
 /**
  *  track Event
@@ -316,5 +320,12 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @return YES if the dispatch process was started.
  */
 - (BOOL)dispatch;
+
+//@property (nonatomic, weak) NSString *bridge;
+@property (nonatomic, weak) WebViewJavascriptBridge *bridge;
+
+- (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;  
+- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
+- (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
 
 @end
