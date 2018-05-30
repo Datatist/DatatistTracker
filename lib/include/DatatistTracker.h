@@ -81,7 +81,11 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 + (instancetype)initWithSiteID:(NSString*)siteID baseURL:(NSURL*)baseURL;
 
++ (instancetype)initWithSiteID:(NSString*)siteID baseURL:(NSURL*)baseURL  AutoTrack:(BOOL)autoTrack;
+
 + (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL;
+
++ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL AutoTrack:(BOOL)autoTrack Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL;
 
 /**
  Return the shared Datatist tracker.
@@ -146,6 +150,8 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  The Datatist server will also create a new session if the event is recorded 30 minutes after the previous received event.
  */
 @property (nonatomic) NSTimeInterval sessionTimeout;
+
+@property (nonatomic, assign) BOOL enableTrack;
 
 
 /**
@@ -320,6 +326,12 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @return YES if the dispatch process was started.
  */
 - (BOOL)dispatch;
+
+- (void)trackForbiddenController:(NSArray *)array;
+
+- (void)enableTrack:(BOOL)enable;
+
+- (void)trackJSEvent:(NSDictionary *)parameters;
 
 //@property (nonatomic, weak) NSString *bridge;
 @property (nonatomic, weak) WebViewJavascriptBridge *bridge;
