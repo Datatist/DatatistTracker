@@ -6,6 +6,9 @@
 //  Copyright 2013 Mattias Levin. All rights reserved.
 //
 
+#define ABOVE_IOS_8_0           1
+#define WKWebView_Bridge        1
+
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "DatatistOrderInfo.h"
@@ -13,7 +16,9 @@
 #import "DatatistProductInfo.h"
 #import "DatatistDispatcher.h"
 #import "DatatistTransaction.h"
+#if ABOVE_IOS_8_0 && WKWebView_Bridge
 #import "WebViewJavascriptBridge.h"
+#endif
 //@import WebViewJavascriptBridge;
 
 @class DatatistOrderInfo;
@@ -129,9 +134,20 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 
 /**
+ user Property
+ */
+@property(nonatomic) NSDictionary *userProperty;
+
+
+/**
  user Id
  */
 @property(nonatomic, strong) NSString *userID;
+
+/**
+ projectId
+ */
+@property(nonatomic) NSString *projectId;
 
 /**
  @name Session control
@@ -304,6 +320,10 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  **/
 - (void)trackEvent:(NSString *)name udVariable:(NSDictionary *)vars;
 
+/**
+ *  customer Track
+ **/
+- (void)customerTrack:(NSString*)name udVariable:(NSDictionary *)vars;
 
 /**
  *  track JPush
@@ -329,12 +349,19 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 - (void)trackForbiddenController:(NSArray *)array;
 
+- (BOOL)permittedController:(NSString *)controllerName;
+
+- (BOOL)hasWebView:(UIView *)view;
+
 - (void)enableTrack:(BOOL)enable;
 
 - (void)trackJSEvent:(NSDictionary *)parameters;
 
-//@property (nonatomic, weak) NSString *bridge;
+- (void)trackClick:(NSDictionary *)parameters;
+
+#if ABOVE_IOS_8_0 && WKWebView_Bridge
 @property (nonatomic, weak) WebViewJavascriptBridge *bridge;
+#endif
 
 - (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;  
 - (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
