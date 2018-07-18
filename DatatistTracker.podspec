@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DatatistTracker'
-  s.version          = '2.2.0'
+  s.version          = '2.2.1'
   s.summary          = ' The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analytics to a Datatist server.'
 
 # This description is used to generate tags and improve search results.
@@ -52,6 +52,6 @@ The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analyt
   s.ios.library = 'c++', 'stdc++', 'z'
   s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
 s.dependency 'WebViewJavascriptBridge'
-s.dependency 'Aspects'
+#s.dependency 'Aspects'
 
 end

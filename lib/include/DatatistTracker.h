@@ -169,6 +169,11 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 @property (nonatomic, assign) BOOL enableTrack;
 
+/**
+ 是否开启全埋点采集，默认为关闭
+ */
+@property (nonatomic, assign) BOOL enableAutoTrack;
+
 
 /**
  @name Dispatch pending events
@@ -349,6 +354,20 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 - (void)trackForbiddenController:(NSArray *)array;
 
+/**
+ 设置忽略采集的UIControl
+
+ @param array 例如要忽略 UIImageView，就把[UIImageView class]加入数组
+ */
+- (void)trackForbiddenControlClass:(NSArray *)array;
+
+/**
+ 判断某个UIControl是否被忽略
+
+ @param aClass 被忽略UIControl的Class
+ @return YES:被忽略; NO:没有被忽略
+ */
+- (BOOL)isViewTypeForbidden:(Class)aClass;
 - (BOOL)permittedController:(NSString *)controllerName;
 
 - (BOOL)hasWebView:(UIView *)view;
