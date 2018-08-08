@@ -374,9 +374,20 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 - (void)enableTrack:(BOOL)enable;
 
+/**
+ 是否上报GPS信息
+ */
+- (void)enableGPSTrack:(BOOL)enable;
+/**
+ 是否开启上报第三方H5页面的ProjectId
+ */
+- (void)enableJSProjectIdTrack:(BOOL)enable;
+
 - (void)trackJSEvent:(NSDictionary *)parameters;
 
 - (void)trackClick:(NSDictionary *)parameters;
+
+- (void)resetSiteId:(NSString *)siteId;
 
 #if ABOVE_IOS_8_0 && WKWebView_Bridge
 @property (nonatomic, weak) WebViewJavascriptBridge *bridge;
