@@ -4,7 +4,7 @@ username： Datatist
 email：info@datatist.com
 password: infomokbel1!
 
-发布方法：
+发布方法1：
     1， 克隆代码 https://gitlab.datatist.cn/datatist/datatist-analyzer-ios-tracker.git 
     2， 打开 DatatistTracker.xcodeproj，修改 DatatistTracker.m 中修改版本号，
         选中 DatatistTracker Scheme，编译
