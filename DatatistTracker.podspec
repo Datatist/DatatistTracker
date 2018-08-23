@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DatatistTracker'
-  s.version          = '2.2.2'
+  s.version          = '2.2.3'
   s.summary          = ' The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analytics to a Datatist server.'
 
 # This description is used to generate tags and improve search results.
@@ -47,6 +47,9 @@ The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analyt
   s.public_header_files = 'lib/include/*.h'
   s.vendored_libraries = 'lib/*.a'
   #s.resource = 'lib/*.bundle'
+  s.resource_bundles = {
+    'DatatistTracker' => 'lib/DTResource.bundle'
+}
   s.license      = 'COMMERCIAL'
   s.frameworks = 'UIKit', 'MapKit', 'Security', 'CoreLocation', 'UserNotifications', 'CoreData', 'CoreTelephony', 'MobileCoreServices', 'JavaScriptCore', 'CoreGraphics', 'Foundation', 'SystemConfiguration'
   s.ios.library = 'c++', 'stdc++', 'z'

@@ -6,7 +6,7 @@
 //  Copyright 2013 Mattias Levin. All rights reserved.
 //
 
-#define ABOVE_IOS_8_0           1
+#define ABOVE_IOS_8_0           0
 #define WKWebView_Bridge        1
 
 #import <UIKit/UIKit.h>
@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 @property (nonatomic) NSUInteger index;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *value;
+
 
 - (id)initWithIndex:(NSUInteger)index name:(NSString*)name value:(NSString*)value;
 
@@ -202,6 +203,9 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 @property (nonatomic) NSUInteger eventsPerRequest;
 
+@property (nonatomic, strong) NSString *visualDefineUrl;
+@property (nonatomic, strong) NSString *visualJSUrl;
+
 /**
  Track a single hierarchical screen view.
  
@@ -214,6 +218,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param vars user defined variables.
  */
 - (void)trackPageView:(NSString *)views title:(NSString *)title udVariable:(NSDictionary *)vars;
+- (void)trackPageView:(NSString *)views title:(NSString *)title;
 
 
 /**
@@ -228,6 +233,18 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackSearch:(NSString *)keyword recommendationSearchFlag:(BOOL)recommendationFlag historySearchFlag:(BOOL)historyFlag udVariable:(NSDictionary *)vars;
 
+/**
+ Track a search performed in the application. The search could be local or towards a server.
+ 
+ Searches will be presented as Site Search requests in the Datatist web interface.
+ 
+ @param keyword The search keyword entered by the user.
+ @param recommendationFlag a flag whether search from recommendation.
+ @param historyFlag a flag whether search from history.
+ */
+- (void)trackSearch:(NSString *)keyword recommendationSearchFlag:(BOOL)recommendationFlag historySearchFlag:(BOOL)historyFlag;
+
+
 
 /**
  Track a register event in the application.
@@ -239,6 +256,15 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackRegister:(NSString *)uid type:(NSString *)type authenticated:(BOOL)auth udVariable:(NSDictionary *)vars;
 
+/**
+ Track a register event in the application.
+ 
+ @param uid user id.
+ @param type register type.
+ @param auth a flag whether authenticated.
+ */
+- (void)trackRegister:(NSString *)uid type:(NSString *)type authenticated:(BOOL)auth;
+
 
 /**
  Track product info.
@@ -249,6 +275,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param vars user defined variables.
  */
 - (void)trackProductPage:(NSString *)sku productCategory1:(NSString *)category1 productCategory2:(NSString *)category2 productCategory3:(NSString *)category3 productOriginPrice: (double)originPrice productRealPrice:(double)realPrice udVariable:(NSDictionary *)vars;
+- (void)trackProductPage:(NSString *)sku productCategory1:(NSString *)category1 productCategory2:(NSString *)category2 productCategory3:(NSString *)category3 productOriginPrice: (double)originPrice productRealPrice:(double)realPrice;
 
 
 /**
@@ -260,6 +287,15 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param vars user defined variables.
  */
 - (void)trackAddCart:(NSString *)sku productQuantity:(long)quantity productRealPrice:(double)realPrice udVariable:(NSDictionary *)vars;
+
+/**
+ Track event of adding product to cart.
+ 
+ @param sku product sku.
+ @param quantity product quantity.
+ @param realPrice product real price.
+ */
+- (void)trackAddCart:(NSString *)sku productQuantity:(long)quantity productRealPrice:(double)realPrice;
 
 
 /**
@@ -277,6 +313,19 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackOrder:(DatatistOrderInfo *)order couponInfo:(NSArray *)coupons productInfo:(NSArray *)products udVariable:(NSDictionary *)vars;
 
+/**
+ Track a order.
+ 
+ A order information as well as an optional list of items included in the transaction.
+ 
+ @param order a object of DatatistOrderInfo.
+ @param coupons an array of DatatistCouponInfo.
+ @param products an array of DatatistProductInfo.
+ @see DatatistOrderInfo
+ @see DatatistCouponInfo
+ @see DatatistProductInfo
+ */
+- (void)trackOrder:(DatatistOrderInfo *)order couponInfo:(NSArray *)coupons productInfo:(NSArray *)products;
 
 /**
  Track a payment.
@@ -288,6 +337,16 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param vars user defined variables.
  */
 - (void)trackPayment:(NSString *)orderId payMethod:(NSString *)method payStatus:(BOOL)pay payAMT:(double)amt udVariable:(NSDictionary *)vars;
+
+/**
+ Track a payment.
+ 
+ @param orderId order id.
+ @param method payment method.
+ @param pay pay status.
+ @param amt total amount
+ */
+- (void)trackPayment:(NSString *)orderId payMethod:(NSString *)method payStatus:(BOOL)pay payAMT:(double)amt;
 
 
 /**
@@ -301,6 +360,16 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackPreCharge:(double)amt chargeMethod:(NSString *)chargeMethod couponAMT:(double)coupon payStatus:(BOOL)pay udVariable:(NSDictionary *)vars;
 
+/**
+ Track a precharge.
+ 
+ @param amt total amount.
+ @param chargeMethod charge method.
+ @param coupon coupon amount.
+ @param pay pay status.
+ */
+- (void)trackPreCharge:(double)amt chargeMethod:(NSString *)chargeMethod couponAMT:(double)coupon payStatus:(BOOL)pay;
+
 
 /**
  Track user login event.
@@ -309,6 +378,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param vars user defined variables.
  */
 - (void)trackLogin:(NSString *)uid udVariable:(NSDictionary *)vars;
+- (void)trackLogin:(NSString *)uid;
 
 /**
  Track user logout event.
@@ -318,7 +388,11 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackLogout:(NSString *)uid udVariable:(NSDictionary *)vars;
 
+//- (void)trackLogoutWithUid:(NSString *)uid;
+
 - (void)trackLogout:(NSDictionary *)vars;
+
+- (void)trackLogout;
 
 /**
  *  track Event
@@ -331,19 +405,34 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 - (void)customerTrack:(NSString*)name udVariable:(NSDictionary *)vars;
 
 /**
- *  track JPush
+ *  track JPush with vars
  **/
 - (void)trackJPush:(NSDictionary *)pushInfo pushIntent:(NSDictionary *)pushIntent udVariable:(NSDictionary *)vars;
 
 /**
- *  track Init JPush
+ *  track JPush
+ **/
+- (void)trackJPush:(NSDictionary *)pushInfo pushIntent:(NSDictionary *)pushIntent;
+
+/**
+ *  track Init JPush with vars
  **/
 - (void)trackInitJPush:(NSDictionary *)pushManager udVariable:(NSDictionary *)vars;
 
 /**
- *  track Open Channel
+ *  track Init JPush
+ **/
+- (void)trackInitJPush:(NSDictionary *)pushManager;
+
+/**
+ *  track Open Channel with vars
  **/
 - (void)trackOpenChannel:(NSString *)openChannelName udVariable:(NSDictionary *)vars;
+
+/**
+ *  track Open Channel with vars
+ **/
+- (void)trackOpenChannel:(NSString *)openChannelName;
 
 /**
  Manually start a dispatch of all pending events.
@@ -387,6 +476,13 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 - (void)trackClick:(NSDictionary *)parameters;
 
+/**
+ 校验可视化圈选的schmeURL
+
+ @param url schmeURL
+ @return YES:匹配成功 NO:不匹配
+ */
++ (BOOL)handleUrl:(NSURL*)url;
 - (void)resetSiteId:(NSString *)siteId;
 
 #if ABOVE_IOS_8_0 && WKWebView_Bridge
