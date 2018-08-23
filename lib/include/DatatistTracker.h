@@ -6,7 +6,7 @@
 //  Copyright 2013 Mattias Levin. All rights reserved.
 //
 
-#define ABOVE_IOS_8_0           0
+#define ABOVE_IOS_8_0           1
 #define WKWebView_Bridge        1
 
 #import <UIKit/UIKit.h>
