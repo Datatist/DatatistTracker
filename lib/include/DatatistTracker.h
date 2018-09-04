@@ -268,10 +268,6 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 /**
  Track product info.
- 
- @param uid user id.
- @param type register type.
- @param auth a flag whether authenticated.
  @param vars user defined variables.
  */
 - (void)trackProductPage:(NSString *)sku productCategory1:(NSString *)category1 productCategory2:(NSString *)category2 productCategory3:(NSString *)category3 productOriginPrice: (double)originPrice productRealPrice:(double)realPrice udVariable:(NSDictionary *)vars;
