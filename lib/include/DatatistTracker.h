@@ -8,6 +8,7 @@
 
 #define ABOVE_IOS_8_0           1
 #define WKWebView_Bridge        1
+#define DatatistDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -89,9 +90,9 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 
 + (instancetype)initWithSiteID:(NSString*)siteID baseURL:(NSURL*)baseURL  AutoTrack:(BOOL)autoTrack;
 
-+ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL;
++ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL DatatistDeprecated("使用initWithSiteID: baseURL:");
 
-+ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL AutoTrack:(BOOL)autoTrack Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL;
++ (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL AutoTrack:(BOOL)autoTrack Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL DatatistDeprecated("使用initWithSiteID: baseURL:AutoTrack") ;
 
 /**
  Return the shared Datatist tracker.
@@ -382,7 +383,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  @param uid user id.
  @param vars user defined variables.
  */
-- (void)trackLogout:(NSString *)uid udVariable:(NSDictionary *)vars;
+- (void)trackLogout:(NSString *)uid udVariable:(NSDictionary *)vars DatatistDeprecated("使用trackLogout");
 
 //- (void)trackLogoutWithUid:(NSString *)uid;
 
