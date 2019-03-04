@@ -109,7 +109,6 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 + (NSString *)version;
 
-
 /**
  @name Tracker configuration
  */
@@ -140,6 +139,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 @property(nonatomic) NSDictionary *userProperty;
 
+@property (nonatomic, strong) NSDictionary *customerVar;
 
 /**
  user Id
@@ -447,6 +447,7 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackForbiddenControlClass:(NSArray *)array;
 
+- (void)trackAddCustomerVar:(NSDictionary *)dic;
 /**
  判断某个UIControl是否被忽略
 
