@@ -6,20 +6,21 @@
 //  Copyright 2013 Mattias Levin. All rights reserved.
 //
 
-#define ABOVE_IOS_8_0           1 
-#define WKWebView_Bridge        1
+//#define ABOVE_IOS_8_0           1
+//#define WKWebView_Bridge        1
 #define DatatistDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import <Foundation/Foundation.h>
 #import "DatatistOrderInfo.h"
 #import "DatatistCouponInfo.h"
 #import "DatatistProductInfo.h"
 #import "DatatistDispatcher.h"
 #import "DatatistTransaction.h"
-#if ABOVE_IOS_8_0 && WKWebView_Bridge
-#import "WebViewJavascriptBridge.h"
-#endif
+//#if ABOVE_IOS_8_0 && WKWebView_Bridge
+//#import "WebViewJavascriptBridge.h"
+//#endif
 //@import WebViewJavascriptBridge;
 
 @class DatatistOrderInfo;
@@ -95,6 +96,10 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 + (instancetype)initWithSiteID:(NSString*)siteID BaseURL:(NSURL*)baseURL AutoTrack:(BOOL)autoTrack Site_1_ID:(NSString*)site_1_ID Base_1_URL:(NSURL*)base_1_URL DatatistDeprecated("使用initWithSiteID: baseURL:AutoTrack") ;
 
 /**
+ APP与JS打通的时候，调用此方法，修改webview的userAgent.JS SDk 根据userAgentd来判断，数据是由APP上报还是由JS上报
+ */
++ (void)addUserAgentToWebview;
+/**
  Return the shared Datatist tracker.
  
  The Datatist tracker must have been created and configured for this method to return the tracker.
@@ -132,6 +137,8 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  show log
  */
 @property(nonatomic) BOOL showLog;
+
+@property(nonatomic) BOOL dataCheck;
 
 
 /**
@@ -447,7 +454,6 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
  */
 - (void)trackForbiddenControlClass:(NSArray *)array;
 
-- (void)trackAddCustomerVar:(NSDictionary *)dic;
 /**
  判断某个UIControl是否被忽略
 
@@ -483,12 +489,13 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 + (BOOL)handleUrl:(NSURL*)url;
 - (void)resetSiteId:(NSString *)siteId;
 
-#if ABOVE_IOS_8_0 && WKWebView_Bridge
-@property (nonatomic, weak) WebViewJavascriptBridge *bridge;
-#endif
+//#if ABOVE_IOS_8_0 && WKWebView_Bridge
+//@property (nonatomic, weak) WebViewJavascriptBridge *bridge;
+//#endif
 
 - (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;  
 - (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
 - (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
 
+- (NSString *)getThePageViewUrl;
 @end
