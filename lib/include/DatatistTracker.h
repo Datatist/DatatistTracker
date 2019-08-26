@@ -493,9 +493,9 @@ typedef NS_ENUM(NSInteger, DatatistAPIRequestResult) {
 //@property (nonatomic, weak) WebViewJavascriptBridge *bridge;
 //#endif
 
-- (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;  
-- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
-- (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
+//- (BOOL)sendTransaction:(DatatistTransaction*)transaction withCustomVariable:(NSDictionary *)vars;  
+//- (BOOL)sendEventWithCategory:(NSString*)category action:(NSString*)action name:(NSString*)name value:(NSString *)value withCustomVariable:(NSDictionary *)vars;
+//- (BOOL)sendWithCustomVariable:(NSDictionary *)vars Views:(NSString*)screen, ...;
 
 - (NSString *)getThePageViewUrl;
 @end

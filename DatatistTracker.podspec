@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DatatistTracker'
-  s.version          = '2.2.8'
+  s.version          = '2.2.8.3'
   s.summary          = ' The DatatistTracker is an Objective-C framework (iOS and OSX) for sending analytics to a Datatist server.'
 
 # This description is used to generate tags and improve search results.
